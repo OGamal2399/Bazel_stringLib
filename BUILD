@@ -1,6 +1,9 @@
-package(default_visibility = ["//visibility:public"])
+# ####### Your code starts here #######
 
-load("//:def.bzl", "string_build_setting")
+# define the package visibility as public to be able to use it in external repo
+# load the string_build_setting target from def.bzl
+load(:def.bzl,"string_build_setting")###
+# #######  Your code ends here  #######
 
 string_build_setting(
     name = "stringJob",
@@ -17,14 +20,19 @@ cc_library(
 		}),
 	hdrs = ["inc/string.h"],
 	includes = ["inc/"],
+	visibility="//visibility:public",####
 )
 
+# ####### Your code starts here #######
+
+# define two config setting based on the select attr above and provide value for actor-name as "actor" and for hero-name as "hero"
 config_setting(
 	name = "actor-name",
-	flag_values  = { ":stringJob" : "actor" },
+	values = {"job" : "actor"},
 )
 
 config_setting(
 	name = "hero-name",
-	flag_values  = { ":stringJob" : "hero" },
+	values = {"job" : "hero"},
 )
+# #######  Your code ends here  #######
